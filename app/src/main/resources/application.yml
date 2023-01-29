@@ -1,0 +1,20 @@
+datasource:
+  default: ${APP_ENV}
+  #В Makefile определяем (через переменную APP_ENV) к какой базе подключаемся:
+  #Локально "development" - к H2, а в продакшене "production" – к PostgreSQL.
+  development:
+    username: sa
+    password: sa
+    url: "jdbc:h2:./database"
+  production:
+    username: ${JDBC_DATABASE_USERNAME}
+    password: ${JDBC_DATABASE_PASSWORD}
+    url: ${JDBC_DATABASE_URL}
+
+ebean:
+#  ddl:
+#    run: true
+#    generate: true
+#    seedSql: seed.sql
+   migration:
+     run: true
