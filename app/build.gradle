@@ -35,10 +35,20 @@ dependencies {
     implementation 'org.postgresql:postgresql:42.2.24'
 
     implementation 'io.ebean:ebean:12.12.1'
+
+    // Позволяет генерировать миграции
     implementation 'io.ebean:ebean-ddl-generator:12.12.1'
+
+    // Query builder. Позволяет строить запросы
     implementation 'io.ebean:ebean-querybean:12.12.1'
+
+    // Позволяет автоматически выполнять миграции
     implementation 'io.ebean:ebean-migration:12.12.1'
+
+    // Добавляет различные аннотации
     implementation 'io.ebean:ebean-annotation:7.3'
+
+    // Обработчик аннотаций используется для генерации компонента запроса
     annotationProcessor 'io.ebean:querybean-generator:12.12.1'
 
     // NOTE: ebean-ddl-generator требует старые зависимости, которых нет в java 9 и выше
@@ -76,9 +86,10 @@ checkstyle {
     toolVersion '9.0'
 }
 
+//Запуск этой таски gradle generateMigrations сгенерирует файл миграции на основании модели
 task generateMigrations(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    mainClass = 'hexlet.code.MigrationGenerator'
+    mainClass = 'hexlet.code.GenerateDbMigration'
 }
 
 task stage(dependsOn: ['clean', 'installDist'])
