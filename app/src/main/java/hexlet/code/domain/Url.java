@@ -1,11 +1,11 @@
-package hexlet.code.model;
+package hexlet.code.domain;
 
 import io.ebean.Model;
 import io.ebean.annotation.WhenCreated;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 // Аннотация @Entity обозначает, что класс Url является моделью
 @Entity
@@ -20,7 +20,7 @@ public class Url extends Model {
 
     // Аннотация @WhenCreated обозначает, что поле фиксирует временную метку создания Entity
     @WhenCreated
-    private LocalDateTime createdAt;
+    private Instant createdAt;
 
 
 

@@ -23,17 +23,27 @@ application {
 }
 
 dependencies {
-    implementation 'io.javalin:javalin:5.3.2'
-    implementation 'org.slf4j:slf4j-simple:2.0.6'
+    // Подключение фреймворка Javalin для работы с WEB
+    implementation 'io.javalin:javalin:4.1.0'
+
+    // Подключение логера SLF4J
+    implementation 'org.slf4j:slf4j-simple:1.7.32'
 
     implementation 'org.thymeleaf:thymeleaf:3.0.12.RELEASE'
+
+    // позволяет создавать общие макеты и переиспользовать (диалект thymeleaf-layout-dialect)
     implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect:3.0.0'
+
+    // добавляет в шаблоны объект temporals со множеством полезных методов по форматированию
     implementation 'org.thymeleaf.extras:thymeleaf-extras-java8time:3.0.4.RELEASE'
+
+    // добавляет зависимость org.webjars:bootstrap из библиотеки webjars, чтобы использовать стили bootstrap
     implementation 'org.webjars:bootstrap:5.1.1'
 
     implementation 'com.h2database:h2:1.4.200'
     implementation 'org.postgresql:postgresql:42.2.24'
 
+    // Подключение ORM ebean для работы с БД
     implementation 'io.ebean:ebean:12.12.1'
 
     // Позволяет генерировать миграции
