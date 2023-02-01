@@ -1,11 +1,15 @@
 package hexlet.code;
 
+import hexlet.code.controllers.RootController;
+import hexlet.code.controllers.UrlController;
 import io.javalin.Javalin;
 import nz.net.ultraq.thymeleaf.layoutdialect.LayoutDialect;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.extras.java8time.dialect.Java8TimeDialect;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import io.javalin.plugin.rendering.template.JavalinThymeleaf;
+
+import static io.javalin.apibuilder.ApiBuilder.*;
 
 public class App {
 
@@ -39,6 +43,22 @@ public class App {
         return templateEngine;
     }
 
+    private static void addRoutes (Javalin app) {
+        app.get("/", RootController.welcome);
+//        app.post("/", RootController.addUrl);
+
+        app.routes(() -> {
+            path("urls", () -> {
+                get(UrlController.listUrls);
+                post(UrlController.addUrl);
+                path("{id}", () -> {
+                    get(UrlController.showUrl);
+                    post(UrlController.checkUrl);
+                });
+            });
+        });
+    }
+
     public static Javalin getApp() {
         // Создаём Javalin инстанс приложения, в аргумент передаем конфигурацию
         Javalin app = Javalin.create(config -> {
@@ -52,8 +72,10 @@ public class App {
 
             // Подключаем фреймворк со стилями Bootstrap из библиотеки webjars
             config.enableWebjars();
-        })
-                .get("/", ctx -> ctx.render("index.html"));
+        });
+
+        // Добавляем в приложение маршруты
+        addRoutes(app);
 
         // Обработчик before запускается перед каждым запросом.
         // Устанавливаем атрибут ctx для запросов.
