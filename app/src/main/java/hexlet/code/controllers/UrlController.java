@@ -18,6 +18,7 @@ public class UrlController {
             enteredUrl = new URL(imputedUrl);
 
         } catch (MalformedURLException e) {
+            ctx.status(422);
             ctx.sessionAttribute("flash", "Некорректный URL");
             ctx.sessionAttribute("flash-type", "danger");
             ctx.render("index.html");
@@ -31,6 +32,7 @@ public class UrlController {
                         .exists();
 
         if (urlExists) {
+            ctx.status(422);
             ctx.sessionAttribute("flash", "Страница уже существует");
             ctx.sessionAttribute("flash-type", "warning");
             ctx.render("index.html");
@@ -67,4 +69,5 @@ public class UrlController {
     };
 
     public static Handler checkUrl = ctx -> {};
+
 }

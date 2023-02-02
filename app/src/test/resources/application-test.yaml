@@ -1,0 +1,9 @@
+ebean:
+  test:
+    platform: h2 # Для тестирования используем БД h2
+    ddlMode: dropCreate # Drop and then create all the tables etc. Most commonly used mode.
+    dbName: test-app-db
+  ddl:
+    run: true
+    generate: true
+#    seedSql: seed-test-app-db.sql

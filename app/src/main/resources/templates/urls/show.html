@@ -8,7 +8,7 @@
 <section layout:fragment="content">
     <div class="container-lg mt-5" th:object="${url}">
         <h1>Сайт: <span th:text="*{name}"></h1>
-        <table class="table">
+        <table class="table table-bordered table-hover mt-3">
             <tr>
                 <td>ID</td>
                 <td th:text="*{id}"></td>
@@ -19,16 +19,16 @@
             </tr>
             <tr>
                 <td>Дата создания</td>
-                <td th:text="*{createdAt}"></td>
+                <td th:text="${url ? #temporals.format(url.createdAt, 'dd/MM/yyyy HH:mm') : ''}"></td>
             </tr>
         </table>
     </div>
     <div class="container-lg mt-5" th:object="${url}">
         <h1>Проверки</h1>
         <div class="col-auto">
-            <button type="submit" class="h-100 btn btn-lg btn-primary px-sm-5">Запустить проверку</button>
+            <button type="submit" class="btn btn-primary">Запустить проверку</button>
         </div>
-        <table class="table">
+        <table class="table table-bordered table-hover mt-3">
             <thead>
             <th>ID</th>
             <th>Код ответа</th>
