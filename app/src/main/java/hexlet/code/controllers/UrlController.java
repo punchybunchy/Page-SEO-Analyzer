@@ -10,6 +10,8 @@ import java.util.List;
 
 public class UrlController {
 
+    public static final int UNPROCESSABLE_ENTITY_STATUS_CODE = 422;
+
     public static Handler addUrl = ctx -> {
         String imputedUrl = ctx.formParamAsClass("url", String.class).getOrDefault(null);
 
@@ -18,7 +20,7 @@ public class UrlController {
             enteredUrl = new URL(imputedUrl);
 
         } catch (MalformedURLException e) {
-            ctx.status(422);
+            ctx.status(UNPROCESSABLE_ENTITY_STATUS_CODE);
             ctx.sessionAttribute("flash", "Некорректный URL");
             ctx.sessionAttribute("flash-type", "danger");
             ctx.render("index.html");
@@ -32,7 +34,7 @@ public class UrlController {
                         .exists();
 
         if (urlExists) {
-            ctx.status(422);
+            ctx.status(UNPROCESSABLE_ENTITY_STATUS_CODE);
             ctx.sessionAttribute("flash", "Страница уже существует");
             ctx.sessionAttribute("flash-type", "warning");
             ctx.render("index.html");
@@ -68,6 +70,8 @@ public class UrlController {
         ctx.render("/urls/show.html");
     };
 
-    public static Handler checkUrl = ctx -> {};
+    public static Handler checkUrl = ctx -> {
+
+    };
 
 }

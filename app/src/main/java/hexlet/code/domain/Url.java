@@ -26,19 +26,19 @@ public class Url extends Model {
         this.name = name;
     }
 
-    public long getId() {
+    public final long getId() {
         return id;
     }
 
-    public String getName() {
+    public final String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public final void setName(String name) {
         this.name = name;
     }
 
-    public Instant getCreatedAt() {
+    public final Instant getCreatedAt() {
         return createdAt;
     }
 

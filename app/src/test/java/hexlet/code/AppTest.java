@@ -38,7 +38,7 @@ public class AppTest {
     }
 
     @BeforeEach
-    void beforeEach() {
+    public final void beforeEach() {
         database.truncate("url");
         url.save();
     }
