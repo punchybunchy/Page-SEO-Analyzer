@@ -24,10 +24,15 @@
         </table>
     </div>
     <div class="container-lg mt-5" th:object="${url}">
-        <h1>Проверки</h1>
-        <div class="col-auto">
-            <button type="submit" class="btn btn-primary">Запустить проверку</button>
-        </div>
+        <h2>Проверки</h2>
+        <form th:action="@{/urls/{id}/checks(id=*{id})}" method="post">
+<!--            <input type="hidden" name="url" value="*{name}">-->
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Запустить проверку</button>
+            </div>
+        </form>
+    </div>
+    <div class="container-lg mt-5" th:object="${urlCheck}">
         <table class="table table-bordered table-hover mt-3">
             <thead>
             <th>ID</th>
@@ -37,6 +42,16 @@
             <th>Description</th>
             <th>Дата проверки</th>
             </thead>
+            <tbody>
+                <tr th:each="urlCheck : ${urlChecks}" th:object="${urlCheck}">
+                    <td th:text="*{id}"></td>
+                    <td th:text="*{statusCode}"></td>
+                    <td th:text="${#strings.abbreviate(urlCheck.getTitle(), 25)}"></td>
+                    <td th:text="${#strings.abbreviate(urlCheck.getH1(), 25)}"></td>
+                    <td th:text="${#strings.abbreviate(urlCheck.getDescription(), 50)}"></td>
+                    <td th:text="${#temporals.format(urlCheck.getCreatedAt(), 'dd/MM/yyyy HH:mm')}"></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 

@@ -1,0 +1,4 @@
+2023-02-03 21:48:06 jdbc[4]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Таблица "URL_CHECK" не найдена
+Table "URL_CHECK" not found; SQL statement:
+alter table url_check drop constraint if exists fk_url_check_url_id [42102-200]

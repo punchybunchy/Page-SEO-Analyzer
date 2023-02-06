@@ -53,7 +53,9 @@ public class App {
                 post(UrlController.addUrl);
                 path("{id}", () -> {
                     get(UrlController.showUrl);
-                    post(UrlController.checkUrl);
+                    path("checks", () -> {
+                        post(UrlController.urlCheck);
+                    });
                 });
             });
         });

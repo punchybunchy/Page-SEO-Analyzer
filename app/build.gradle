@@ -65,6 +65,8 @@ dependencies {
     implementation 'org.glassfish.jaxb:jaxb-runtime:2.3.5'
     implementation 'javax.activation:activation:1.1.1'
     implementation 'org.jsoup:jsoup:1.14.3'
+
+    // Библиотека Unirest для конструирования и выполнения HTTP запросов
     implementation 'com.konghq:unirest-java:3.13.0'
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
