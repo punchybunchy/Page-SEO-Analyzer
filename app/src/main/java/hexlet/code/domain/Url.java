@@ -43,7 +43,7 @@ public class Url extends Model {
         this.name = name;
     }
 
-    public List<UrlCheck> getUrlChecks() {
+    public final List<UrlCheck> getUrlChecks() {
         return urlChecks;
     }
 
