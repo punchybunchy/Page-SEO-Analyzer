@@ -17,12 +17,12 @@
       </thead>
       <tbody>
       <tr th:each="url : ${urls}" th:object="${url}">
-        <td th:text="*{id}"></td>
+        <td th:text="*{getId()}"></td>
         <td>
-          <a th:text="*{getName()}" th:href="@{/urls/{id}(id=*{getId()})}"></a>
+          <a th:href="@{/urls/{id}(id=*{getId()})}" th:text="${#strings.abbreviate(url.getName(), 30)}"></a>
         </td>
-        <td></td>
-        <td></td>
+        <td th:text="*{urlChecks.isEmpty()} ? '' : *{urlChecks.get(urlChecks.size() - 1).getCreatedAt()}"></td>
+        <td th:text="*{urlChecks.isEmpty()} ? '' : *{urlChecks.get(urlChecks.size() - 1).getStatusCode()}"></td>
       </tr>
     </table>
   </div>
