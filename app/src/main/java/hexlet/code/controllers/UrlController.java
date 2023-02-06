@@ -21,7 +21,7 @@ import java.util.stream.IntStream;
 
 public class UrlController {
 
-    public static final int UNPROCESSABLE_ENTITY_STATUS_CODE = 422;
+//    public static final int UNPROCESSABLE_ENTITY_STATUS_CODE = 422;
 
     public static Handler addUrl = ctx -> {
         String inputUrl = ctx.formParamAsClass("url", String.class).getOrDefault(null);
@@ -31,7 +31,7 @@ public class UrlController {
             enteredUrl = new URL(inputUrl);
 
         } catch (MalformedURLException e) {
-            ctx.status(UNPROCESSABLE_ENTITY_STATUS_CODE);
+//            ctx.status(UNPROCESSABLE_ENTITY_STATUS_CODE);
             ctx.sessionAttribute("flash", "Некорректный URL");
             ctx.sessionAttribute("flash-type", "danger");
             ctx.render("index.html");
@@ -45,7 +45,7 @@ public class UrlController {
                         .exists();
 
         if (urlExists) {
-            ctx.status(UNPROCESSABLE_ENTITY_STATUS_CODE);
+//            ctx.status(UNPROCESSABLE_ENTITY_STATUS_CODE);
             ctx.sessionAttribute("flash", "Страница уже существует");
             ctx.sessionAttribute("flash-type", "warning");
             ctx.render("index.html");
@@ -79,7 +79,6 @@ public class UrlController {
                 .range(1, lastPage)
                 .boxed()
                 .collect(Collectors.toList());
-
 
         ctx.attribute("urls", urls);
         ctx.attribute("pages", pages);
