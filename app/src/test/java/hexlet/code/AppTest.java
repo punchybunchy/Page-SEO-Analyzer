@@ -176,8 +176,6 @@ public class AppTest {
 
         //Получаем от MockWebServer сервера адрес тестовой страницы и нормализуем используя метод getNormalizedUrl
         String inputUrl = getNormalizedUrl(mockWebServer.url("/").toString());
-        System.out.println("Адрес тестовой страницы: " + inputUrl);
-
 
         //Добавляем тестовую страницу на проверку
         HttpResponse<String> postUrlResponse = Unirest.post(baseUrl + "/urls")
