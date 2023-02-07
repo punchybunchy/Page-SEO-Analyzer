@@ -15,3 +15,5 @@ bin
 .project*
 .classpath
 .idea/
+
+*.db
