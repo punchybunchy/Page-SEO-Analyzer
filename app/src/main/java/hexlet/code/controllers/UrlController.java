@@ -6,6 +6,7 @@ import hexlet.code.domain.query.QUrl;
 import hexlet.code.domain.query.QUrlCheck;
 import io.ebean.PagedList;
 import io.javalin.http.Handler;
+import io.javalin.http.NotFoundResponse;
 import kong.unirest.HttpResponse;
 import kong.unirest.Unirest;
 import kong.unirest.UnirestException;
@@ -16,6 +17,7 @@ import org.jsoup.nodes.Element;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -34,7 +36,7 @@ public class UrlController {
 //            ctx.status(UNPROCESSABLE_ENTITY_STATUS_CODE);
             ctx.sessionAttribute("flash", "Некорректный URL");
             ctx.sessionAttribute("flash-type", "danger");
-            ctx.render("index.html");
+            ctx.redirect("/");
             return;
         }
 
@@ -48,7 +50,7 @@ public class UrlController {
 //            ctx.status(UNPROCESSABLE_ENTITY_STATUS_CODE);
             ctx.sessionAttribute("flash", "Страница уже существует");
             ctx.sessionAttribute("flash-type", "warning");
-            ctx.render("index.html");
+            ctx.redirect("/");
             return;
         }
 
@@ -73,6 +75,12 @@ public class UrlController {
 
         List<Url> urls = pagedUrls.getList();
 
+        Map<Long, UrlCheck> urlChecks = new QUrlCheck()
+                .url.id.asMapKey()
+                .orderBy()
+                .createdAt.desc()
+                .findMap();
+
         int lastPage = pagedUrls.getTotalPageCount() + 1;
         int currentPage = pagedUrls.getPageIndex() + 1;
         List<Integer> pages = IntStream
@@ -81,6 +89,7 @@ public class UrlController {
                 .collect(Collectors.toList());
 
         ctx.attribute("urls", urls);
+        ctx.attribute("urlChecks", urlChecks);
         ctx.attribute("pages", pages);
         ctx.attribute("currentPage", currentPage);
         ctx.render("urls/index.html");
@@ -92,6 +101,10 @@ public class UrlController {
         Url url = new QUrl()
                 .id.equalTo(urlId)
                 .findOne();
+
+        if (url == null) {
+            throw new NotFoundResponse();
+        }
 
         List<UrlCheck> urlChecks = new QUrlCheck()
                 .url.equalTo(url)
@@ -111,6 +124,10 @@ public class UrlController {
         Url urlItem = new QUrl()
                 .id.equalTo(id)
                 .findOne();
+
+        if (urlItem == null) {
+            throw new NotFoundResponse();
+        }
 
         try {
             UrlCheck urlCheckItem = getUrlCheckItem(urlItem);
