@@ -26,6 +26,13 @@ make start
 # Open http://localhost:4985
 ```
 
+## Check application
+
+```bash
+Application SEO web page analyzer
+# Open https://java-project-72-production-a0cb.up.railway.app
+```
+
 ---
 
 [![SEO web page analyzer](https://img.youtube.com/vi/0uHkZKGEJH4/0.jpg)](https://www.youtube.com/watch?v=0uHkZKGEJH4 "SEO web page analyzer")
