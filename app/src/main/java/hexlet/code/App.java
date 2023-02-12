@@ -39,6 +39,7 @@ public class App {
         // файлы в директории с шаблонами /templates/
         ClassLoaderTemplateResolver templateResolver = new ClassLoaderTemplateResolver();
         templateResolver.setPrefix("/templates/");
+        templateResolver.setCharacterEncoding("UTF-8");
         // Добавляем преобразователь шаблонов к движку шаблонизатора
         templateEngine.addTemplateResolver(templateResolver);
 
